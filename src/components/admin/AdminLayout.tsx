@@ -1,6 +1,7 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useStoreSettings } from "@/contexts/StoreSettingsContext";
+import { useAuth } from "@/contexts/AuthContext";
 import "@/styles/variables.css";
 import "@/styles/admin.css";
 
@@ -15,8 +16,15 @@ const navItems = [
 
 const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { settings, getImageUrl } = useStoreSettings();
+  const { logout } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login", { replace: true });
+  };
 
   React.useEffect(() => {
     setIsSidebarOpen(false);
@@ -68,10 +76,12 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           ))}
         </nav>
         <div className="admin-sidebar-footer">
-           <Link to="/" style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--fg-muted)", display: "flex", alignItems: "center", gap: "8px", textTransform: "uppercase", letterSpacing: "0.06em", transition: "color 0.15s" }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-              Voir Boutique
-           </Link>
+          <button type="button" className="admin-logout-btn" onClick={handleLogout}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+            </svg>
+            Déconnexion
+          </button>
         </div>
       </aside>
       <main className="admin-content">

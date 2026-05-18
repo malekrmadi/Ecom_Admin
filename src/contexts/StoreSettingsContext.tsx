@@ -1,14 +1,15 @@
 import React, { createContext, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { StoreSettingsService, StoreSettings } from "@/lib/services";
+import { DEMO_IMAGES } from "@/mock/demoImages";
 
 const defaultSettings: StoreSettings = {
   store_name: "Huiles Moteurs Tunisie",
-  logo_url: "/uploads/branding/logo.png",
+  logo_url: DEMO_IMAGES.branding.logo,
   hero_title: "Huiles & Lubrifiants Premium pour votre Moteur",
   hero_subtitle:
     "Huiles moteur, additifs et graisses de grandes marques. Livraison dans toute la Tunisie.",
-  banner_image_url: "/uploads/branding/banner.jpg",
+  banner_image_url: DEMO_IMAGES.branding.banner,
   facebook_url: "",
   instagram_url: "",
   email: "contact@huilesmoteurs.tn",

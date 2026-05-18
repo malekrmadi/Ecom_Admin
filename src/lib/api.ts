@@ -1,4 +1,5 @@
 import { mockStore } from "@/mock/mockStore";
+import { DEMO_IMAGES } from "@/mock/demoImages";
 
 /** Legacy: images are served from `public/` (no backend). */
 export const API_BASE = "";
@@ -90,5 +91,5 @@ export const api = {
   delete: (url: string) => mockDelete(url).then(() => ({ data: undefined })),
 };
 
-export const getPlaceholderImage = (id: string | number = 1) =>
-  `/uploads/products/placeholder.jpg?id=${id}`;
+export const getPlaceholderImage = (_id: string | number = 1) =>
+  DEMO_IMAGES.products.placeholder;

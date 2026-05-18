@@ -1,7 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { StoreSettingsProvider } from "@/contexts/StoreSettingsContext";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/admin/ProtectedRoute";
 
+import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/admin/DashboardPage";
 import ProductsPage from "@/pages/admin/ProductsPage";
 import AddProductPage from "@/pages/admin/AddProductPage";
@@ -22,27 +25,34 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <StoreSettingsProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Navigate to="/admin" replace />} />
-          <Route path="/admin" element={<DashboardPage />} />
-          <Route path="/admin/products" element={<ProductsPage />} />
-          <Route path="/admin/products/new" element={<AddProductPage />} />
-          <Route path="/admin/products/:id" element={<EditProductPage />} />
-          <Route path="/admin/categories" element={<AdminCategoriesPage />} />
-          <Route path="/admin/categories/new" element={<AddCategoryPage />} />
-          <Route path="/admin/categories/:id" element={<EditCategoryPage />} />
-          <Route path="/admin/orders" element={<OrdersPage />} />
-          <Route path="/admin/orders/:id" element={<OrderDetailsPage />} />
-          <Route path="/admin/returns" element={<ReturnsPage />} />
-          <Route path="/admin/customers" element={<CustomersPage />} />
-          <Route path="/admin/settings" element={<StoreSettingsPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </StoreSettingsProvider>
+    <AuthProvider>
+      <StoreSettingsProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<Navigate to="/admin" replace />} />
+
+            <Route element={<ProtectedRoute />}>
+              <Route path="/admin" element={<DashboardPage />} />
+              <Route path="/admin/products" element={<ProductsPage />} />
+              <Route path="/admin/products/new" element={<AddProductPage />} />
+              <Route path="/admin/products/:id" element={<EditProductPage />} />
+              <Route path="/admin/categories" element={<AdminCategoriesPage />} />
+              <Route path="/admin/categories/new" element={<AddCategoryPage />} />
+              <Route path="/admin/categories/:id" element={<EditCategoryPage />} />
+              <Route path="/admin/orders" element={<OrdersPage />} />
+              <Route path="/admin/orders/:id" element={<OrderDetailsPage />} />
+              <Route path="/admin/returns" element={<ReturnsPage />} />
+              <Route path="/admin/customers" element={<CustomersPage />} />
+              <Route path="/admin/settings" element={<StoreSettingsPage />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </StoreSettingsProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 

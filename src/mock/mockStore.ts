@@ -1,4 +1,5 @@
 import type { Product, StoreSettings } from "@/lib/services";
+import { DEMO_IMAGES } from "@/mock/demoImages";
 import {
   initialCategories,
   initialProducts,
@@ -56,7 +57,7 @@ export const mockStore = {
       is_on_promo: body.is_on_promo === true || body.is_on_promo === "true",
       stock: parseInt(String(body.stock || 0), 10),
       category_id: parseInt(String(body.category_id || 1), 10),
-      image_url: String(body.image_url || "/uploads/products/placeholder.jpg"),
+      image_url: String(body.image_url || DEMO_IMAGES.products.placeholder),
       is_active: body.is_active !== false && body.is_active !== "false",
       is_visible: body.is_visible !== false && body.is_visible !== "false",
       viscosity: String(body.viscosity || ""),
@@ -93,7 +94,7 @@ export const mockStore = {
       id: nextCategoryId++,
       name: String(data.name || "Catégorie"),
       slug: String(data.slug || `cat-${nextCategoryId}`),
-      image_url: String(data.image_url || "/uploads/categories/placeholder.jpg"),
+      image_url: String(data.image_url || DEMO_IMAGES.categories.placeholder),
       is_active: data.is_active !== false,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
