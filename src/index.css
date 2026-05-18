@@ -1,0 +1,38 @@
+@import "./styles/variables.css";
+@import "./styles/store.css";
+@import "./styles/admin.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global utility overrides (CSS vars > Tailwind) ── */
+.text-primary  { color: var(--primary) !important; }
+.text-muted    { color: var(--fg-muted); }
+.text-danger   { color: var(--danger); }
+.text-success  { color: var(--success); }
+.bg-primary\/10 { background: var(--primary-light); }
+
+/* ── Status select inline (orders table) ── */
+.status-select-inline {
+  appearance: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Spacing helpers ── */
+.mt-8  { margin-top: 2rem; }
+.mb-0  { margin-bottom: 0; }
+.m-0   { margin: 0; }
+.space-y-8 > * + * { margin-top: 2rem; }
+.space-y-6 > * + * { margin-top: 1.5rem; }
+.space-y-1 > * + * { margin-top: 0.25rem; }
+
